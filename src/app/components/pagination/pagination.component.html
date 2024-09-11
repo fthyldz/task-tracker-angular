@@ -1,0 +1,20 @@
+<div class="flex justify-center items-center space-x-2 mt-4">
+    <!-- Geri Butonu -->
+    <button (click)="changePage(page - 1)" [disabled]="page === 1"
+        class="px-3 py-1 bg-gray-300 hover:bg-gray-400 rounded">
+        <i class="hgi-stroke hgi-arrow-left-01"></i>
+    </button>
+
+    <!-- Sayfa Numaraları ve "..." -->
+    <button *ngFor="let p of pagesToShow(); let i = index" (click)="p === '...' ? onClickDots(p, i) : changePage(p)"
+        [disabled]="p === page" class="px-3 py-1 rounded"
+        [ngClass]="{'bg-gray-400': p === page, 'bg-gray-300 hover:bg-gray-400': p !== page}">
+        {{ p }}
+    </button>
+
+    <!-- İleri Butonu -->
+    <button (click)="changePage(page + 1)" [disabled]="page === totalPages"
+        class="px-3 py-1 bg-gray-300 hover:bg-gray-400 rounded">
+        <i class="hgi-stroke hgi-arrow-right-01"></i>
+    </button>
+</div>

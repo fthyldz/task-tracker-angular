@@ -1,0 +1,36 @@
+<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead>
+        <tr class="bg-gray-200 text-left">
+            <th *ngFor="let col of columns" class="py-2 px-4 border-b">{{ col.title }}</th>
+            <th *ngIf="actions" class="py-2 px-4 border-b text-end">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data" class="hover:bg-gray-300">
+            <td *ngFor="let col of columns" class="py-2 px-4 border-b">{{ item[col.key] }}</td>
+            <td *ngIf="actions" class="py-2 px-4 border-b text-end">
+                <button *ngIf="actions.edit" class="px-2 py-1 text-white bg-blue-500 rounded mr-2 hover:bg-blue-600">
+                    <i class="hgi-stroke hgi-pencil-edit-01"></i>
+                </button>
+                <button *ngIf="actions.detail"
+                    class="px-2 py-1 text-white bg-green-500 rounded mr-2 hover:bg-green-600">
+                    <i class="hgi-stroke hgi-information-circle"></i>
+                </button>
+                <button *ngIf="actions.delete" class="px-2 py-1 text-white bg-red-500 rounded mr-2 hover:bg-red-600">
+                    <i class="hgi-stroke hgi-delete-01"></i>
+                </button>
+                <button *ngIf="actions.active" (click)="item.isActive = !item.isActive"
+                    class="px-2 py-1 text-white bg-gray-500 rounded hover:bg-gray-600">
+                    <i class="hgi-stroke"
+                        [ngClass]="{'hgi-toggle-on': item.isActive, 'hgi-toggle-off': !item.isActive}"></i>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="totalCount == 0">
+            <td class="py-2 px-4 border-b text-center" [colSpan]="columns.length">{{ noRecordText }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<app-pagination *ngIf="totalCount > 0" [page]="page" [totalCount]="totalCount" [itemsPerPage]="itemsPerPage"
+    (pageChanged)="pageChanged($event)"></app-pagination>

@@ -1,1 +1,6 @@
-<p>Dashboard Component</p>
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-semibold mb-4">Kullanıcılar</h1>
+    <app-data-table [columns]="columns" [data]="paginatedUsers()" [totalCount]="users.length"
+        [itemsPerPage]="itemsPerPage" (onPageChange)="onPageChange($event)"
+        [actions]="{ delete: true, edit: true, detail: true, active: true }"></app-data-table>
+</div>

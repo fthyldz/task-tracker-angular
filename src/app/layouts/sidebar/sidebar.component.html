@@ -1,0 +1,36 @@
+<aside id="sidebar" class="bg-gray-900 text-gray-200 w-64 h-full py-6 px-4 overflow-auto">
+    <nav class="space-y-4">
+        <div class="relative" *ngFor="let item of items">
+
+            <ng-container *ngIf="item.children; then expandable; else notexpandable">
+            </ng-container>
+
+            <ng-template #expandable>
+                <button (click)="item.isExpanded = !item.isExpanded"
+                    class="flex items-center py-2 px-4 rounded hover:bg-gray-700 w-full text-left cursor-pointer">
+                    <i class="hgi-stroke {{ item.icon }} mr-3"></i>
+                    {{ item.title }}
+                    <i class="ml-auto hgi-stroke hgi-arrow-left-01 transform transition-transform duration-500"
+                        [ngClass]="{'-rotate-90': item.isExpanded, 'rotate-0': !item.isExpanded}"></i>
+                </button>
+                <div class="overflow-hidden transition-all" style="transition-duration: 500ms;"
+                    [ngStyle]="{'max-height': item.isExpanded ? '100px' : '0px'}">
+                    <div class="pl-8 mt-2 space-y-2">
+                        <a *ngFor="let subitem of item.children" [href]="subitem.href"
+                            class="flex py-2 px-4 rounded hover:bg-gray-600"><i class="hgi-stroke hgi-circle mr-3"></i>
+                            {{ subitem.title }}</a>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #notexpandable>
+                <a [href]="item.href"
+                    class="flex items-center py-2 px-4 rounded hover:bg-gray-700 w-full text-left cursor-pointer">
+                    <i class="hgi-stroke {{ item.icon }} mr-3"></i>
+                    {{ item.title }}
+                </a>
+            </ng-template>
+
+        </div>
+    </nav>
+</aside>

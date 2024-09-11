@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { HeaderComponent } from "./header.component";
-import { SidebarComponent } from "./sidebar.component";
+import { SidebarComponent } from "./sidebar/sidebar.component";
 import { FooterComponent } from "./footer.component";
 import { RouterOutlet } from "@angular/router";
 
